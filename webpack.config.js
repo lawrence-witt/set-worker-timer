@@ -9,6 +9,9 @@ const config = {
         library: "worker-timeout",
         libraryTarget: "umd"
     },
+    resolve: {
+        extensions: [".ts"]
+    },
     module: {
         rules: [
             {

@@ -4,14 +4,14 @@ const ctx: Worker = self as any;
 
 const store: TimeoutMap = new Map();
 
-const set = (id: number, ms: number) => {
+const set = (id: number, delay: number) => {
     const record = store.get(id);
     if (record) clearTimeout(record);
 
     store.set(id, setTimeout(() => {
         ctx.postMessage({type: 'call', payload: { id }});
         store.delete(id);
-    }, ms));
+    }, delay));
 };
 
 const clear = (id: number) => {
@@ -25,7 +25,7 @@ const clear = (id: number) => {
 ctx.addEventListener('message', (ev: MessageEvent<SetMessage | ClearMessage>) => {
     switch (ev.data.type) {
         case "set":
-            set(ev.data.payload.id, ev.data.payload.ms);
+            set(ev.data.payload.id, ev.data.payload.delay);
         case "clear":
             clear(ev.data.payload.id);
         default:

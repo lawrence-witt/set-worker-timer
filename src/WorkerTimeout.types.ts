@@ -17,7 +17,7 @@ export interface SetMessage {
     type: 'set';
     payload: {
         id: number;
-        ms: number;
+        delay: number;
     }
 }
 

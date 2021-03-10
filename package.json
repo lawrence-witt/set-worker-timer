@@ -20,6 +20,7 @@
     "worker-loader": "^3.0.8"
   },
   "jest": {
-    "preset": "ts-jest"
+    "preset": "ts-jest",
+    "testTimeout": 2000
   }
 }

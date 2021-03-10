@@ -2,6 +2,8 @@
 
 import { setWorkerTimeout, clearWorkerTimeout } from '../src';
 
+jest.mock('../src/lib/WorkerTimeout.worker.ts');
+
 test("it should return a number", () => {
     const id = setWorkerTimeout(() => {}, 0);
 
@@ -33,19 +35,17 @@ test("it should return a unique number", () => {
 test("it should call the function after the specified delay", done => {
     const first = performance.now();
 
-    const id = setWorkerTimeout(() => {
+    setWorkerTimeout(() => {
         const last = performance.now();
 
-        expect(last - first).toBeGreaterThanOrEqual(500);
+        expect(last - first).toBeGreaterThanOrEqual(200);
 
-        clearWorkerTimeout(id);
         done();
-    }, 500);
+    }, 200);
 });
 
 test("it should call the function when no delay is specified", done => {
-    const id = setWorkerTimeout(() => {
-        clearWorkerTimeout(id);
+    setWorkerTimeout(() => {
         done();
     })
 });

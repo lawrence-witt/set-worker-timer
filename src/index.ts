@@ -1,4 +1,4 @@
-import WorkerTimeout from './WorkerTimeout';
+import WorkerTimeout from './lib/WorkerTimeout';
 
 window.workerTimeout = 
     window.workerTimeout instanceof WorkerTimeout ? 

@@ -36,7 +36,10 @@ class TimeoutWorker {
     *   Public Methods
     */
 
-    public setWorkerTimeout(cb: () => void, delay?: number): number {
+    public setWorkerTimeout(
+        cb: (...args: any[]) => void, 
+        delay?: number
+    ): number {
         const id = this._genId();
         this._cbMap.set(id, cb);
         this._worker.postMessage({type: 'set', payload: { id, delay: delay || 0 }});

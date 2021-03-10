@@ -22,6 +22,9 @@ const config = {
             {
                 test: /\.ts?$/,
                 loader: "ts-loader",
+                options: {
+                    configFile: "tsconfig.webpack.json"
+                }
             }
         ]
     }

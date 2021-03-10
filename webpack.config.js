@@ -6,7 +6,7 @@ const config = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "index.js",
-        library: "worker-timeout",
+        library: "set-worker-timeout",
         libraryTarget: "umd"
     },
     resolve: {

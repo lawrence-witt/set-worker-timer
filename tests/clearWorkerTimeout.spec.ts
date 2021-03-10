@@ -6,10 +6,10 @@ test("it should return undefined", () => {
     const id = setWorkerTimeout(() => {});
     const clear = clearWorkerTimeout(id);
 
-    expect(clear).not.toBeDefined();
+    expect(clear).toBeUndefined();
 });
 
-test("it should stop the callback from executing", done => {
+test("it should stop the function from executing", done => {
     const stub = jest.fn();
 
     const id = setWorkerTimeout(stub, 10);
@@ -21,17 +21,18 @@ test("it should stop the callback from executing", done => {
     }, 20);
 });
 
-test("id should only stop the cleared callback from executing", done => {
+test("it should only stop the cleared function from executing", done => {
     const callStub = jest.fn();
     const clearStub = jest.fn();
 
-    setWorkerTimeout(callStub, 10);
+    const callId = setWorkerTimeout(callStub, 10);
     const clearId = setWorkerTimeout(clearStub, 10);
     clearWorkerTimeout(clearId);
 
     setTimeout(() => {
         expect(callStub).toHaveBeenCalled();
         expect(clearStub).not.toHaveBeenCalled();
+        clearWorkerTimeout(callId);
         done();
     }, 20);
 })

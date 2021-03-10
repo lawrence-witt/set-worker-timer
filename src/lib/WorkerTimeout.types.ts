@@ -1,6 +1,9 @@
 // Main
 
-export type CallbackMap = Map<number, () => void>;
+export type CallbackMap = Map<number, {
+    cb: ((...args: any[]) => void) | string;
+    args: any[];
+}>;
 
 export interface CallMessage {
     type: 'call';

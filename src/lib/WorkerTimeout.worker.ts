@@ -20,16 +20,8 @@ const clear = (id: number) => {
 };
 
 ctx.addEventListener('message', (ev: MessageEvent<SetMessage | ClearMessage>) => {
-    switch (ev.data.type) {
-        case "set":
-            set(ev.data.payload.id, ev.data.payload.delay);
-            break;
-        case "clear":
-            clear(ev.data.payload.id);
-            break;
-        default:
-            break;
-    }
+    if (ev.data.type === "set") set(ev.data.payload.id, ev.data.payload.delay);
+    if (ev.data.type === "clear") clear(ev.data.payload.id);
 });
 
 export default null as any;

@@ -20,16 +20,8 @@ class TimeoutWorker {
     }
 
     public postMessage(data: SetMessage | ClearMessage) {
-        switch (data.type) {
-            case "set":
-                this._set(data.payload.id, data.payload.delay);
-                break;
-            case "clear":
-                this._clear(data.payload.id);
-                break;
-            default:
-                break;
-        }
+        if (data.type === "set") this._set(data.payload.id, data.payload.delay);
+        if (data.type === "clear") this._clear(data.payload.id);
     }
 
     public addEventListener(ev: 'message', cb: (ev: { data: CallMessage }) => void) {

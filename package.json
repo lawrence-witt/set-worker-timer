@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "setTimeout and setInterval, but with Web Workers",
   "main": "dist/index.js",
+  "types": "dist/@types/index.d.ts",
   "scripts": {
     "build": "webpack --mode production --config webpack.config.js",
     "test": "jest --runInBand ./tests"

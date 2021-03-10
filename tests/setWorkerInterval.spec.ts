@@ -1,67 +1,66 @@
-import { setWorkerTimeout, clearWorkerTimeout } from '../src';
+import { setWorkerInterval, clearWorkerInterval } from '../src';
 
 jest.mock('../src/lib/WorkerTimer.worker.ts');
 
 test("it should return a number", () => {
-    const id = setWorkerTimeout(() => {});
+    const id = setWorkerInterval(() => {});
 
     expect(typeof id).toEqual("number");
 
-    clearWorkerTimeout(id);
+    clearWorkerInterval(id);
 });
 
 test("it should return a float", () => {
-    const id = setWorkerTimeout(() => {});
+    const id = setWorkerInterval(() => {});
     const split = id.toString().split('.');
 
     expect(split).toHaveLength(2);
 
-    clearWorkerTimeout(id);
+    clearWorkerInterval(id);
 });
 
 test("it should return a unique number", () => {
-    const id1 = setWorkerTimeout(() => {});
-    const id2 = setWorkerTimeout(() => {});
+    const id1 = setWorkerInterval(() => {});
+    const id2 = setWorkerInterval(() => {});
 
     expect(id1).not.toEqual(id2);
 
-    clearWorkerTimeout(id1);
-    clearWorkerTimeout(id2);
+    clearWorkerInterval(id1);
+    clearWorkerInterval(id2);
 });
 
-test("it should call the function after the specified delay", done => {
-    const first = performance.now();
+test("it should call the function repeatedly", done => {
+    const stub = jest.fn();
 
-    const id = setWorkerTimeout(() => {
-        const last = performance.now();
+    const id = setWorkerInterval(stub, 10);
 
-        expect(last - first).toBeGreaterThanOrEqual(100);
-
-        clearWorkerTimeout(id);
+    setTimeout(() => {
+        expect(stub).toHaveBeenCalledTimes(5);
+        clearWorkerInterval(id);
         done();
-    }, 110);
+    }, 55);
 });
 
 test("it should call the function when no delay is specified", done => {
-    const id = setWorkerTimeout(() => {
-        clearWorkerTimeout(id);
+    const id = setWorkerInterval(() => {
+        clearWorkerInterval(id);
         done();
     })
 });
 
 test("it should call the function without argument parameters by default", done => {
-    const id = setWorkerTimeout((param: undefined) => {
+    const id = setWorkerInterval((param: undefined) => {
         expect(param).toBeUndefined();
-        clearWorkerTimeout(id);
+        clearWorkerInterval(id);
         done();
     })
 });
 
 test("it should call the function with argument parameters when supplied", done => {
-    const id = setWorkerTimeout((param1: string, param2: number) => {
+    const id = setWorkerInterval((param1: string, param2: number) => {
         expect(param1).toBe("test");
         expect(param2).toBe(42);
-        clearWorkerTimeout(id);
+        clearWorkerInterval(id);
         done();
     }, 0, "test", 42);
 });
@@ -69,11 +68,11 @@ test("it should call the function with argument parameters when supplied", done 
 test("it should call an evaluated string with argument parameters", done => {
     const stub = jest.fn();
 
-    const id = setWorkerTimeout("stub => stub()", 0, stub);
+    const id = setWorkerInterval("stub => stub()", 0, stub);
 
     setTimeout(() => {
         expect(stub).toHaveBeenCalled();
-        clearWorkerTimeout(id);
+        clearWorkerInterval(id);
         done();
     }, 10);
 });

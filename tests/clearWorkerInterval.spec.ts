@@ -1,10 +1,10 @@
-import { setWorkerTimeout, clearWorkerTimeout, clearWorkerInterval } from '../src';
+import { setWorkerInterval, clearWorkerInterval, clearWorkerTimeout } from '../src';
 
 jest.mock('../src/lib/WorkerTimer.worker.ts');
 
 test("it should return undefined", () => {
-    const id = setWorkerTimeout(() => {});
-    const clear = clearWorkerTimeout(id);
+    const id = setWorkerInterval(() => {});
+    const clear = clearWorkerInterval(id);
 
     expect(clear).toBeUndefined();
 });
@@ -12,8 +12,8 @@ test("it should return undefined", () => {
 test("it should stop the function from executing", done => {
     const stub = jest.fn();
 
-    const id = setWorkerTimeout(stub, 10);
-    clearWorkerTimeout(id);
+    const id = setWorkerInterval(stub, 10);
+    clearWorkerInterval(id);
 
     setTimeout(() => {
         expect(stub).not.toHaveBeenCalled();
@@ -25,23 +25,23 @@ test("it should only stop the cleared function from executing", done => {
     const callStub = jest.fn();
     const clearStub = jest.fn();
 
-    const callId = setWorkerTimeout(callStub, 10);
-    const clearId = setWorkerTimeout(clearStub, 10);
-    clearWorkerTimeout(clearId);
+    const callId = setWorkerInterval(callStub, 10);
+    const clearId = setWorkerInterval(clearStub, 10);
+    clearWorkerInterval(clearId);
 
     setTimeout(() => {
         expect(callStub).toHaveBeenCalled();
         expect(clearStub).not.toHaveBeenCalled();
-        clearWorkerTimeout(callId);
+        clearWorkerInterval(callId);
         done();
     }, 20);
 });
 
-test("it should still work when cleared with clearWorkerInterval", done => {
+test("it should still work when cleared with clearWorkerTimeout", done => {
     const stub = jest.fn();
 
-    const id = setWorkerTimeout(stub, 10);
-    clearWorkerInterval(id);
+    const id = setWorkerInterval(stub, 10);
+    clearWorkerTimeout(id);
 
     setTimeout(() => {
         expect(stub).not.toHaveBeenCalled();

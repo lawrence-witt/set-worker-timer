@@ -1,7 +1,7 @@
 {
-  "name": "set-worker-timeout",
+  "name": "set-worker-timer",
   "version": "1.0.0",
-  "description": "setTimeout, but with Web Workers",
+  "description": "setTimeout and setInterval, but with Web Workers",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode production --config webpack.config.js",

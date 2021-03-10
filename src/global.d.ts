@@ -1,8 +1,8 @@
-import WorkerTimeout from './lib/WorkerTimeout';
+import WorkerTimer from './lib/WorkerTimer';
 
 declare global {
     interface Window { 
-        workerTimeout: WorkerTimeout; 
+        workerTimer: WorkerTimer; 
     }
 }
 

@@ -1,7 +1,12 @@
-import Worker from './WorkerTimeout.worker.ts';
-import { CallbackMap, CallMessage } from './WorkerTimeout.types';
+import Worker from './WorkerTimer.worker.ts';
+import {
+    TimerMethod,
+    TimerCallback,
+    CallbackMap, 
+    CallMessage 
+} from './WorkerTimer.types';
 
-class TimeoutWorker {
+class WorkerTimer {
     private _worker = new Worker();
     private _cbMap: CallbackMap = new Map();
 
@@ -35,32 +40,40 @@ class TimeoutWorker {
 
         typeof record.cb === 'string' ? 
         eval(record.cb)(...record.args) : record.cb(...record.args);
-        this._cbMap.delete(id); 
+        
+        if (record.method === "timeout") this._cbMap.delete(id); 
     }
 
     /* 
     *   Public Methods
     */
 
-    public setWorkerTimeout(
-        cb: ((...args: any[]) => void) | string, 
+    public setWorkerTimer(
+        method: TimerMethod,
+        cb: TimerCallback, 
         delay?: number, 
         ...args: any[]
     ): number {
         const id = this._genId();
 
-        this._cbMap.set(id, { cb, args });
-        this._worker.postMessage({type: 'set', payload: { id, delay: delay || 0 }});
+        this._cbMap.set(id, { method, cb, args });
+        this._worker.postMessage({
+            type: 'set', 
+            payload: { method, id, delay: delay || 0 }
+        });
 
         return id;
     }
 
-    public clearWorkerTimeout(id: number): void {
+    public clearWorkerTimer(id: number): void {
         if (!id || typeof id !== "number") return;
 
         this._cbMap.delete(id);
-        this._worker.postMessage({type: 'clear', payload: { id }});
+        this._worker.postMessage({
+            type: 'clear', 
+            payload: { id }
+        });
     }
 }
 
-export default TimeoutWorker;
+export default WorkerTimer;

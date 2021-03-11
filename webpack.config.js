@@ -3,6 +3,7 @@ const path = require('path');
 const config = {
     mode: "production",
     entry: "./src/index.ts",
+    target: "es5",
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "index.js",

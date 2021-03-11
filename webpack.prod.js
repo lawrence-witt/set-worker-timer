@@ -11,7 +11,7 @@ const config = {
         libraryTarget: "umd"
     },
     resolve: {
-        extensions: [".ts"]
+        extensions: [".ts", ".js"]
     },
     module: {
         rules: [
@@ -24,7 +24,7 @@ const config = {
                 test: /\.ts?$/,
                 loader: "ts-loader",
                 options: {
-                    configFile: "tsconfig.webpack.json"
+                    configFile: "tsconfig.prod.json"
                 }
             }
         ]

@@ -5,6 +5,7 @@
 		"declarationDir": "./dist/@types",
 		"noImplicitAny": true,
 		"target": "es5",
+		"skipLibCheck": true,
 		"module": "commonjs",
         "esModuleInterop": true,
 		"moduleResolution": "node",

@@ -3,10 +3,10 @@
 		"noImplicitAny": true,
 		"target": "es5",
 		"lib": ["es5", "es6", "dom"],
+		"skipLibCheck": true,
 		"module": "commonjs",
         "esModuleInterop": true,
 		"moduleResolution": "node",
 		"strict": true
-	},
-	"include": ["src/**/*", "tests/**/*"]
+	}
 }

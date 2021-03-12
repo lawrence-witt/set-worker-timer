@@ -21,7 +21,7 @@
     "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2",
-    "worker-loader": "^3.0.8"
+    "worker-loader": "github:lawrence-witt/worker-loader"
   },
   "jest": {
     "preset": "ts-jest",

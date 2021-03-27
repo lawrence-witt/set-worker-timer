@@ -6,13 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
-    <h2 id="timeout-elapsed">0</h2>
-    <button id="set-timeout">Set Timeout Loop</button>
-    <button id="clear-timeout">Clear Timeout Loop</button>
+<body style="padding: 10px; margin: 0; height: 100vh; box-sizing: border-box; display: flex; flex-direction: column;">
+    <div style="height: 50%; display: flex; flex-direction: column;">
+        <div>
+            <button id="set-timeout">Set Timeout Loop</button>
+            <button id="clear-timeout">Clear Timeout Loop</button>
+        </div>
+        <div id="timeout-elapsed" style="width: 100%; flex: 1; overflow: auto;"></div>
+    </div>
     <hr>
-    <h2 id="interval-elapsed">0</h2>
-    <button id="set-interval">Set Interval</button>
-    <button id="clear-interval">Clear Interval</button>
+    <div style="height: 50%; display: flex; flex-direction: column;">
+        <div>
+            <button id="set-interval">Set Interval</button>
+            <button id="clear-interval">Clear Interval</button>
+        </div>
+        <div id="interval-elapsed" style="width: 100%; flex: 1; overflow: auto;"></div>
+    </div>
 </body>
 </html>

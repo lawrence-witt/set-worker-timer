@@ -18,6 +18,13 @@ let timeoutInitial: number | undefined;
 let intervalLoop: ReturnType<typeof setWorkerInterval>;
 let intervalInitial: number | undefined;
 
+const appendLog = (element: HTMLDivElement, msg: string, colour?: string) => {
+    const p = document.createElement('p');
+    if (colour) p.style.color = colour;
+    p.textContent = msg;
+    element.append(p);
+}
+
 setTimeoutBtn.onclick = () => {
     if (timeoutInitial) return;
 
@@ -25,8 +32,7 @@ setTimeoutBtn.onclick = () => {
 
     const loop = () => {
         const elapsed = performance.now() - timeoutInitial!
-        console.log(elapsed);
-        timeoutElapsed.innerHTML = `${elapsed}`;
+        appendLog(timeoutElapsed, ""+elapsed);
         timeoutLoop = setWorkerTimeout(loop, 100);
     };
 
@@ -48,8 +54,7 @@ setIntervalBtn.onclick = () => {
 
     intervalLoop = setWorkerInterval(() => {
         const elapsed = performance.now() - intervalInitial!
-        console.log(elapsed);
-        intervalElapsed.innerHTML = `${elapsed}`;
+        appendLog(intervalElapsed, ""+elapsed);
     }, 100);
 }
 
@@ -62,5 +67,6 @@ clearIntervalBtn.onclick = () => {
 }
 
 window.addEventListener('visibilitychange', () => {
-    console.warn(document.visibilityState);
+    if (timeoutInitial) appendLog(timeoutElapsed, document.visibilityState.toUpperCase(), 'red');
+    if (intervalInitial) appendLog(intervalElapsed, document.visibilityState.toUpperCase(), 'red');
 })

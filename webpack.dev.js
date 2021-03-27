@@ -27,9 +27,6 @@ const config = {
             }
         ]
     },
-    stats: {
-        errorDetails: true
-    },
     devServer: {
         port: 3000
     },

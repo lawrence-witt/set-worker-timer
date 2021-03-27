@@ -31,7 +31,7 @@ setTimeoutBtn.onclick = () => {
     timeoutInitial = performance.now();
 
     const loop = () => {
-        const elapsed = performance.now() - timeoutInitial!
+        const elapsed = performance.now() - (timeoutInitial as number);
         appendLog(timeoutElapsed, ""+elapsed);
         timeoutLoop = setWorkerTimeout(loop, 100);
     };
@@ -53,7 +53,7 @@ setIntervalBtn.onclick = () => {
     intervalInitial = performance.now();
 
     intervalLoop = setWorkerInterval(() => {
-        const elapsed = performance.now() - intervalInitial!
+        const elapsed = performance.now() - (intervalInitial as number);
         appendLog(intervalElapsed, ""+elapsed);
     }, 100);
 }

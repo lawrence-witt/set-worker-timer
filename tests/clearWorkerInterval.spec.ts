@@ -3,7 +3,7 @@ import { setWorkerInterval, clearWorkerInterval, clearWorkerTimeout } from '../s
 jest.mock('../src/lib/WorkerTimer.worker.ts');
 
 test("it should return undefined", () => {
-    const id = setWorkerInterval(() => {});
+    const id = setWorkerInterval(() => ({}));
     const clear = clearWorkerInterval(id);
 
     expect(clear).toBeUndefined();

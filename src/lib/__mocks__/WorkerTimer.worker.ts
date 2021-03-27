@@ -9,7 +9,10 @@ class TimeoutWorker {
         id: number, 
         delay: number
     ) {
-        const call = () => this._listener!({data: {type: 'call', payload: { id }}});
+        const call = () => {
+            if (!this._listener) throw new Error('worker mock has not been provided an event listener.');
+            this._listener({data: {type: 'call', payload: { id }}});
+        }
 
         const timerId = method === 'timeout' ? (
             setTimeout(() => { call(); this._store.delete(id); }, delay)
@@ -33,7 +36,7 @@ class TimeoutWorker {
         this._store.delete(id);
     }
 
-    public postMessage(data: SetMessage | ClearMessage) {
+    public postMessage(data: SetMessage | ClearMessage): void {
         if (data.type === "set") this._set(
             data.payload.method,
             data.payload.id, 
@@ -42,7 +45,7 @@ class TimeoutWorker {
         if (data.type === "clear") this._clear(data.payload.id);
     }
 
-    public addEventListener(ev: 'message', cb: (ev: { data: CallMessage }) => void) {
+    public addEventListener(ev: 'message', cb: (ev: { data: CallMessage }) => void): void {
         if (ev === 'message') this._listener = cb;
     }
 }

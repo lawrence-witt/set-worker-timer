@@ -3,7 +3,7 @@ import { setWorkerInterval, clearWorkerInterval } from '../src';
 jest.mock('../src/lib/WorkerTimer.worker.ts');
 
 test("it should return a number", () => {
-    const id = setWorkerInterval(() => {});
+    const id = setWorkerInterval(() => ({}));
 
     expect(typeof id).toEqual("number");
 
@@ -11,7 +11,7 @@ test("it should return a number", () => {
 });
 
 test("it should return a float", () => {
-    const id = setWorkerInterval(() => {});
+    const id = setWorkerInterval(() => ({}));
     const split = id.toString().split('.');
 
     expect(split).toHaveLength(2);
@@ -20,8 +20,8 @@ test("it should return a float", () => {
 });
 
 test("it should return a unique number", () => {
-    const id1 = setWorkerInterval(() => {});
-    const id2 = setWorkerInterval(() => {});
+    const id1 = setWorkerInterval(() => ({}));
+    const id2 = setWorkerInterval(() => ({}));
 
     expect(id1).not.toEqual(id2);
 

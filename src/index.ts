@@ -8,23 +8,16 @@ window.workerTimer =
 const setWorkerTimer = window.workerTimer.setWorkerTimer.bind(window.workerTimer);
 const clearWorkerTimer = window.workerTimer.clearWorkerTimer.bind(window.workerTimer);
 
-const setWorkerTimeout = (
+export const setWorkerTimeout = (
     cb: TimerCallback, 
     delay?: number, 
     ...args: any[]
-) => setWorkerTimer('timeout', cb, delay, ...args);
-const clearWorkerTimeout = (id: number) => clearWorkerTimer(id);
+): number => setWorkerTimer('timeout', cb, delay, ...args);
+export const clearWorkerTimeout = (id: number): void => clearWorkerTimer(id);
 
-const setWorkerInterval = (
+export const setWorkerInterval = (
     cb: TimerCallback, 
     delay?: number, 
     ...args: any[]
-) => setWorkerTimer('interval', cb, delay, ...args);
-const clearWorkerInterval = (id: number) => clearWorkerTimer(id);
-
-export {
-    setWorkerTimeout,
-    clearWorkerTimeout,
-    setWorkerInterval,
-    clearWorkerInterval
-}
+): number => setWorkerTimer('interval', cb, delay, ...args);
+export const clearWorkerInterval = (id: number): void => clearWorkerTimer(id);

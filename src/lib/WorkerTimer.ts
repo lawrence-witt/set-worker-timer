@@ -32,7 +32,9 @@ class WorkerTimer {
         return id;
     }
 
-    private _callId(ev: MessageEvent<CallMessage>) {
+    private _callId(
+        ev: MessageEvent<CallMessage>
+    ) {
         const id = ev.data.payload.id;
         const record = this._cbMap.get(id);
 
@@ -65,7 +67,9 @@ class WorkerTimer {
         return id;
     }
 
-    public clearWorkerTimer(id: number): void {
+    public clearWorkerTimer(
+        id: number
+    ): void {
         if (!id || typeof id !== "number") return;
 
         this._cbMap.delete(id);

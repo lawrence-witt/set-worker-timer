@@ -18,10 +18,6 @@ class WorkerTimer {
         });
     }
 
-    /* 
-    *   Private Methods
-    */
-
     private _genId() {
         let id = Math.random();
 
@@ -45,10 +41,6 @@ class WorkerTimer {
         
         if (record.method === "timeout") this._cbMap.delete(id); 
     }
-
-    /* 
-    *   Public Methods
-    */
 
     public setWorkerTimer(
         method: TimerMethod,

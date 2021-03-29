@@ -1,4 +1,4 @@
-// Main
+// Main Thread
 
 export type TimerMethod = 'timeout' | 'interval';
 export type TimerCallback = ((...args: any[]) => void) | string;
@@ -16,7 +16,7 @@ export interface CallMessage {
     }
 }
 
-// Worker
+// Worker Thread
 
 export type TimeoutMap = Map<number, {
     method: TimerMethod;

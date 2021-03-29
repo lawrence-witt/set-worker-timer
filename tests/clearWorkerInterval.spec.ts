@@ -1,6 +1,6 @@
 import { setWorkerInterval, clearWorkerInterval, clearWorkerTimeout } from '../src';
 
-jest.mock('../src/lib/WorkerTimer.worker.ts');
+jest.mock('../src/module/WorkerTimer.worker.ts');
 
 test("it should return undefined", () => {
     const id = setWorkerInterval(() => ({}));

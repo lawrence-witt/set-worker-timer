@@ -1,25 +1,39 @@
 const path = require('path');
 
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV.trim();
 
-/* if (env !== "umd" || env !== "es") {
-    console.log(env, typeof env)
-    throw new Error('NODE_ENV argument of either "umd" or "es" is required.');
-} */
+if (env !== "umd" && env !== "es") {
+    throw new Error('NODE_ENV argument of either umd or es is required.');
+}
+
+const resolveTsConfig = (format) => {
+    return path.resolve(process.cwd(), `config/typescript/tsconfig.${format}.json`);
+};
 
 const settings = {
     umd: {
         output: {
             filename: "index.js",
-            libraryTarget: "umd"
+            library: {
+                name: "set-worker-timer",
+                type: "umd"
+            }
         },
-        tsConfig: path.resolve(process.cwd(), 'config/typescript/tsconfig.umd.json')
+        tsConfig: resolveTsConfig("umd"),
+        experiments: {}
     },
     es: {
         output: {
-            filename: "index.module.js"
+            filename: "index.module.js",
+            module: true,
+            library: {
+                type: "module"
+            }
         },
-        tsConfig: path.resolve(process.cwd(), 'config/typescript/tsconfig.module.json')
+        tsConfig: resolveTsConfig("module"),
+        experiments: {
+            outputModule: true
+        }
     }
 }[env];
 
@@ -29,7 +43,6 @@ const config = {
     target: "es5",
     output: {
         path: path.resolve(process.cwd(), "dist"),
-        library: "set-worker-timer",
         ...settings.output
     },
     resolve: {
@@ -50,7 +63,8 @@ const config = {
                 }
             }
         ]
-    }
+    },
+    experiments: settings.experiments
 }
 
 module.exports = config;

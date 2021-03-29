@@ -1,5 +1,5 @@
-import WorkerTimer from './lib/WorkerTimer';
-import { TimerCallback } from './lib/WorkerTimer.types';
+import WorkerTimer from './module/WorkerTimer';
+import { TimerCallback } from './module/WorkerTimer.types';
 
 window.workerTimer = 
     window.workerTimer instanceof WorkerTimer ? 

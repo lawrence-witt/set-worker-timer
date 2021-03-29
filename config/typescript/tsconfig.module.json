@@ -1,6 +1,6 @@
 {
 	"compilerOptions": {
-		"outDir": "./dist/",
+		"outDir": "../../dist/",
 		"noImplicitAny": true,
 		"target": "es5",
 		"skipLibCheck": true,
@@ -9,6 +9,6 @@
 		"moduleResolution": "node",
 		"strict": true
 	},
-	"include": ["src/**/*"],
-	"exclude": ["src/lib/__mocks__/WorkerTimer.worker.ts"]
+	"include": ["../../src/**/*"],
+	"exclude": ["../../src/lib/__mocks__/WorkerTimer.worker.ts"]
 }

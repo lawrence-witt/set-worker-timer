@@ -1,6 +1,6 @@
 import { setWorkerTimeout, clearWorkerTimeout } from '../src';
 
-jest.mock('../src/lib/WorkerTimer.worker.ts');
+jest.mock('../src/module/WorkerTimer.worker.ts');
 
 test("it should return a number", () => {
     const id = setWorkerTimeout(() => ({}));

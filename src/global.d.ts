@@ -1,4 +1,4 @@
-import WorkerTimer from './lib/WorkerTimer';
+import WorkerTimer from './module/WorkerTimer';
 
 declare global {
     interface Window { 

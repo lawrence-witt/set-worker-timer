@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "setTimeout and setInterval, but with Web Workers",
   "main": "dist/index.js",
-  "types": "dist/@types/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "scripts": {
-    "start": "webpack serve --config webpack.dev.js --hot",
-    "build": "webpack --mode production --config webpack.prod.js",
+    "start": "webpack serve --config config/webpack/webpack.dev.js --hot",
+    "build:umd": "set NODE_ENV=umd& webpack --config config/webpack/webpack.prod.js",
+    "build:es": "set NODE_ENV=es& webpack --config config/webpack/webpack.prod.js",
     "lint": "eslint . --ext .ts",
     "test": "jest --runInBand ./tests"
   },

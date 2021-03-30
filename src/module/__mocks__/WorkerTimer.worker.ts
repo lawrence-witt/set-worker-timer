@@ -4,20 +4,22 @@ class TimeoutWorker {
     private _store: TimeoutMap = new Map();
     private _listener: ((ev: { data: CallMessage }) => void) | null = null;
 
+    private _call(
+        id: number
+    ) {
+        if (!this._listener) throw new Error('worker mock has not been provided an event listener.');
+        this._listener({data: {type: 'call', payload: { id }}});
+    }
+
     private _set(
         method: TimerMethod, 
         id: number, 
         delay: number
     ) {
-        const call = () => {
-            if (!this._listener) throw new Error('worker mock has not been provided an event listener.');
-            this._listener({data: {type: 'call', payload: { id }}});
-        }
-
         const timerId = method === 'timeout' ? (
-            setTimeout(() => { call(); this._store.delete(id); }, delay)
+            setTimeout(() => { this._call(id); this._store.delete(id); }, delay)
         ) : (
-            setInterval(call, delay)
+            setInterval(() => this._call(id), delay)
         );
 
         this._store.set(id, { method, timerId });

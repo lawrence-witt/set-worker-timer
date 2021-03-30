@@ -9,17 +9,21 @@ const ctx: Worker = self as any;
 
 const store: TimeoutMap = new Map();
 
+const call = (
+    id: number
+) => {
+    ctx.postMessage({type: 'call', payload: { id }});
+}
+
 const set = (
     method: TimerMethod, 
     id: number, 
     delay: number
 ) => {
-    const call = () => ctx.postMessage({type: 'call', payload: { id }});
-
     const timerId = method === 'timeout' ? (
-        setTimeout(() => { call(); store.delete(id); }, delay)
+        setTimeout(() => { call(id); store.delete(id); }, delay)
     ) : (
-        setInterval(call, delay)
+        setInterval(() => call(id), delay)
     );
 
     store.set(id, { method, timerId });
@@ -27,6 +31,7 @@ const set = (
 
 const clear = (id: number) => {
     const record = store.get(id);
+    
     if (!record) return;
 
     record.method === 'timeout' ? (

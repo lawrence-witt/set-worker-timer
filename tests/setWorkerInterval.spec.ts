@@ -30,15 +30,16 @@ test("it should return a unique number", () => {
 });
 
 test("it should call the function repeatedly", done => {
-    const stub = jest.fn();
+    let callCount = 0;
 
-    const id = setWorkerInterval(stub, 10);
+    const id = setWorkerInterval(() => ++callCount, 100);
 
     setTimeout(() => {
-        expect(stub).toHaveBeenCalledTimes(5);
+        expect(callCount).toBeGreaterThanOrEqual(9);
+        expect(callCount).toBeLessThanOrEqual(11);
         clearWorkerInterval(id);
         done();
-    }, 55);
+    }, 1100);
 });
 
 test("it should call the function when no delay is specified", done => {

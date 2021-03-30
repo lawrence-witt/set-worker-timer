@@ -1,6 +1,7 @@
 // Main Thread
 
 export type TimerMethod = 'timeout' | 'interval';
+
 export type TimerCallback = ((...args: any[]) => void) | string;
 
 export type CallbackMap = Map<number, {

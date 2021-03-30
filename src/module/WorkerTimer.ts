@@ -32,6 +32,7 @@ class WorkerTimer {
         ev: MessageEvent<CallMessage>
     ) {
         const id = ev.data.payload.id;
+        
         const record = this._cbMap.get(id);
 
         if (!record) return;
@@ -51,6 +52,7 @@ class WorkerTimer {
         const id = this._genId();
 
         this._cbMap.set(id, { method, cb, args });
+
         this._worker.postMessage({
             type: 'set', 
             payload: { method, id, delay: delay || 0 }
@@ -65,6 +67,7 @@ class WorkerTimer {
         if (!id || typeof id !== "number") return;
 
         this._cbMap.delete(id);
+
         this._worker.postMessage({
             type: 'clear', 
             payload: { id }

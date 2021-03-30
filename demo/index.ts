@@ -22,7 +22,7 @@ const appendLog = (element: HTMLDivElement, msg: string, colour?: string) => {
     const p = document.createElement('p');
     if (colour) p.style.color = colour;
     p.textContent = msg;
-    element.append(p);
+    element.appendChild(p);
 }
 
 setTimeoutBtn.onclick = () => {

@@ -7,7 +7,9 @@
 		"module": "es6",
         "esModuleInterop": true,
 		"moduleResolution": "node",
-		"strict": true
+		"strict": true,
+		"removeComments": true
 	},
-	"include": ["../../src/**/*"]
+	"include": ["../../src/**/*"],
+	"exclude": ["../../src/module/__mocks__/**/*"]
 }

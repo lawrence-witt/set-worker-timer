@@ -7,11 +7,15 @@
   "types": "dist/types/index.d.ts",
   "scripts": {
     "start": "webpack serve --config config/webpack/webpack.dev.js --hot",
+    "clean": "rimraf dist lib",
     "build:umd": "set NODE_ENV=umd && webpack --config config/webpack/webpack.prod.js",
     "build:es": "set NODE_ENV=es && webpack --config config/webpack/webpack.prod.js",
     "build:lib:es": "tsc --p config/typescript/tsconfig.lib.json",
+    "build": "npm run clean && npm run build:umd && npm run build:es && npm run build:lib:es",
     "lint": "eslint . --ext .ts",
-    "test": "jest --runInBand ./tests"
+    "test": "jest --runInBand ./tests",
+    "posttest": "npm run lint",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "files": [
     "dist",
@@ -26,6 +30,7 @@
     "eslint": "^7.23.0",
     "html-webpack-plugin": "^5.3.1",
     "jest": "^26.6.3",
+    "rimraf": "^3.0.2",
     "ts-jest": "^26.5.3",
     "ts-loader": "^8.0.17",
     "typescript": "^4.2.3",

@@ -22,6 +22,10 @@
     "lib"
   ],
   "author": "Lawrence Witt",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lawrence-witt/set-worker-timer"
+  },
   "license": "MIT",
   "keywords": [
     "setTimeout",

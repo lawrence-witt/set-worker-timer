@@ -84,7 +84,7 @@ setWorkerTimeout('() => {
 
 ## Changelog
 
-* ### 1.0.0 - 01/04/2021
+* ### 0.1.0 - 01/04/2021
   * Initial release
 
 ## License

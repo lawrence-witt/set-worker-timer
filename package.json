@@ -1,6 +1,6 @@
 {
   "name": "set-worker-timer",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "setTimeout and setInterval, but with Web Workers",
   "main": "dist/index.js",
   "module": "dist/index.module.js",

@@ -80,7 +80,7 @@ setWorkerTimeout('() => {
 
 ## Contributors
 
-[@lawrence-witt]("https://github.com/lawrence-witt)
+[@lawrence-witt]("https://github.com/lawrence-witt")
 
 ## Changelog
 

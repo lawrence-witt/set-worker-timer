@@ -25,8 +25,7 @@ npm install set-worker-timer
 import { 
     setWorkerTimeout, 
     setWorkerInterval,
-    clearWorkerTimeout,
-    clearWorkerInterval
+    clearWorkerTimer
 } from 'set-worker-timer':
 ````
 `set-worker-timer` attaches to the global scope so imports from any file always link back to the same class instantation.
@@ -48,14 +47,10 @@ const intervalId = setWorkerInterval(() => {
 ### Clear
 
 ````
-clearWorkerTimeout(timeoutId);
-clearWorkerInterval(intervalId);
+clearWorkerTimer(timeoutId);
+clearWorkerTimer(intervalId);
 ````
-`set-worker-timer` uses one callback list and one Worker so clear methods can be called interchangeably.
-````
-clearWorkerTimeout(intervalId);
-clearWorkerInterval(timeoutId);
-````
+`set-worker-timer` uses one callback list and one Worker so either type of timer can be cleared with the same method.
 
 ## Features
 
@@ -84,8 +79,12 @@ setWorkerTimeout('() => {
 
 ## Changelog
 
+* ### 0.2.0 - 01/04/2021
+  * Remove esmodule build.
+  * Combine clear methods into clearWorkerTimer.
+
 * ### 0.1.0 - 01/04/2021
-  * Initial release
+  * Initial release.
 
 ## License
 

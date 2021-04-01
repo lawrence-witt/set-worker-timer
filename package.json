@@ -2,24 +2,22 @@
   "name": "set-worker-timer",
   "version": "0.1.0",
   "description": "setTimeout and setInterval, but with Web Workers",
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
-  "types": "dist/types/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/types/index.d.ts",
   "scripts": {
     "start": "webpack serve --config config/webpack/webpack.dev.js --hot",
     "clean": "rimraf dist lib",
-    "build:umd": "set NODE_ENV=umd && webpack --config config/webpack/webpack.prod.js",
-    "build:es": "set NODE_ENV=es && webpack --config config/webpack/webpack.prod.js",
+    "build:umd": "webpack --config config/webpack/webpack.prod.js",
     "build:lib:es": "tsc --p config/typescript/tsconfig.lib.json",
-    "build": "npm run clean && npm run build:umd && npm run build:es && npm run build:lib:es",
+    "build": "npm run clean && npm run build:umd && npm run build:lib:es",
     "lint": "eslint . --ext .ts",
     "test": "jest --runInBand ./tests",
     "posttest": "npm run lint",
     "prepublishOnly": "npm run test && npm run build"
   },
   "files": [
-    "dist",
-    "lib"
+    "dist/**/*",
+    "lib/**/*"
   ],
   "author": "Lawrence Witt",
   "repository": {

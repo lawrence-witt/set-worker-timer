@@ -12,5 +12,5 @@
 		"strict": true
 	},
 	"include": ["../../src/**/*"],
-	"exclude": ["../../src/lib/__mocks__/WorkerTimer.worker.ts"]
+	"exclude": ["../../src/module/__mocks__/**/*"]
 }

@@ -1,8 +1,7 @@
 import { 
     setWorkerTimeout,
-    clearWorkerTimeout,
     setWorkerInterval,
-    clearWorkerInterval
+    clearWorkerTimer
 } from '../src';
 
 const timeoutElapsed = document.getElementById('timeout-elapsed') as HTMLDivElement;
@@ -42,7 +41,7 @@ setTimeoutBtn.onclick = () => {
 clearTimeoutBtn.onclick = () => {
     if (!timeoutInitial) return;
 
-    clearWorkerTimeout(timeoutLoop);
+    clearWorkerTimer(timeoutLoop);
 
     timeoutInitial = undefined;
 }
@@ -61,7 +60,7 @@ setIntervalBtn.onclick = () => {
 clearIntervalBtn.onclick = () => {
     if (!intervalInitial) return;
 
-    clearWorkerInterval(intervalLoop);
+    clearWorkerTimer(intervalLoop);
 
     intervalInitial = undefined;
 }

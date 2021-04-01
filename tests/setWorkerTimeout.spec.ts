@@ -1,4 +1,4 @@
-import { setWorkerTimeout, clearWorkerTimeout } from '../src';
+import { setWorkerTimeout, clearWorkerTimer } from '../src';
 
 jest.mock('../src/module/WorkerTimer.worker.ts');
 
@@ -7,7 +7,7 @@ test("it should return a number", () => {
 
     expect(typeof id).toEqual("number");
 
-    clearWorkerTimeout(id);
+    clearWorkerTimer(id);
 });
 
 test("it should return a float", () => {
@@ -16,7 +16,7 @@ test("it should return a float", () => {
 
     expect(split).toHaveLength(2);
 
-    clearWorkerTimeout(id);
+    clearWorkerTimer(id);
 });
 
 test("it should return a unique number", () => {
@@ -25,8 +25,8 @@ test("it should return a unique number", () => {
 
     expect(id1).not.toEqual(id2);
 
-    clearWorkerTimeout(id1);
-    clearWorkerTimeout(id2);
+    clearWorkerTimer(id1);
+    clearWorkerTimer(id2);
 });
 
 test("it should call the function after the specified delay", done => {
@@ -37,14 +37,14 @@ test("it should call the function after the specified delay", done => {
 
         expect(last - first).toBeGreaterThanOrEqual(100);
 
-        clearWorkerTimeout(id);
+        clearWorkerTimer(id);
         done();
     }, 110);
 });
 
 test("it should call the function when no delay is specified", done => {
     const id = setWorkerTimeout(() => {
-        clearWorkerTimeout(id);
+        clearWorkerTimer(id);
         done();
     })
 });
@@ -52,7 +52,7 @@ test("it should call the function when no delay is specified", done => {
 test("it should call the function without argument parameters by default", done => {
     const id = setWorkerTimeout((param: undefined) => {
         expect(param).toBeUndefined();
-        clearWorkerTimeout(id);
+        clearWorkerTimer(id);
         done();
     })
 });
@@ -61,7 +61,7 @@ test("it should call the function with argument parameters when supplied", done 
     const id = setWorkerTimeout((param1: string, param2: number) => {
         expect(param1).toBe("test");
         expect(param2).toBe(42);
-        clearWorkerTimeout(id);
+        clearWorkerTimer(id);
         done();
     }, 0, "test", 42);
 });
@@ -73,7 +73,7 @@ test("it should call an evaluated string with argument parameters", done => {
 
     setTimeout(() => {
         expect(stub).toHaveBeenCalled();
-        clearWorkerTimeout(id);
+        clearWorkerTimer(id);
         done();
     }, 10);
 });
